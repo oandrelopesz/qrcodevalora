@@ -205,7 +205,7 @@ h2::after{
   font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;
   color:var(--ink);
 }
-input[type=text]{
+input[type=text],input[type=tel]{
   font-family:var(--body);font-size:16px;color:var(--ink);
   background:var(--tint-2);
   border:1px solid var(--line-soft);
@@ -214,12 +214,17 @@ input[type=text]{
   width:100%;
   transition:border-color .18s,background .18s,box-shadow .18s;
 }
-input[type=text]::placeholder{color:#AAA196}
-input[type=text]:hover{border-color:#C9BFB2}
-input[type=text]:focus{
+input[type=text]::placeholder,input[type=tel]::placeholder{color:#AAA196}
+input[type=text]:hover,input[type=tel]:hover{border-color:#C9BFB2}
+input[type=text]:focus,input[type=tel]:focus{
   outline:none;border-color:var(--gold-deep);background:#fff;
   box-shadow:0 0 0 4px rgba(150,114,63,.14);
 }
+
+input.invalido,input.invalido:focus{border-color:#B8433A;box-shadow:0 0 0 4px rgba(184,67,58,.13)}
+.hint-erro{font-size:13px;color:#8C2F2F;margin:0;line-height:1.5}
+.hint-erro[hidden]{display:none}
+a.send.enviando{pointer-events:none;opacity:.85}
 
 /* opções: um bloco só, dividido por filetes */
 .opts{
@@ -548,6 +553,12 @@ footer .frase{
       </div>
 
       <div class="field">
+        <label class="lbl" for="tel">Telefone</label>
+        <input type="tel" id="tel" name="tel" placeholder="(11) 9 9999-9999" inputmode="numeric" autocomplete="tel-national" maxlength="16">
+        <p class="hint-erro" id="telErro" hidden></p>
+      </div>
+
+      <div class="field">
         <label class="lbl" for="esp">Especialidade</label>
         <input type="text" id="esp" name="esp" placeholder="Ex.: Cardiologia, Dermatologia, Ginecologia">
       </div>
@@ -641,7 +652,65 @@ footer .frase{
 <script>
 (function(){
   var NUMERO = "5512996746674";
+  var PLANILHA_URL = "https://script.google.com/macros/s/AKfycbx_odzdL3BfOuWHrArMoSav70ARbk4fMpeQKxpPYcdIdgb2Xga7drIQh1AswRr3r7AnmQ/exec"; // Web App do Apps Script (grava na planilha)
   var erro = document.getElementById("erro");
+
+  /* ---------- telefone: máscara (xx) x xxxx-xxxx + DDD válido ---------- */
+  var DDDS = [11,12,13,14,15,16,17,18,19,21,22,24,27,28,31,32,33,34,35,37,38,41,42,43,44,45,46,47,48,49,51,53,54,55,61,62,63,64,65,66,67,68,69,71,73,74,75,77,79,81,82,83,84,85,86,87,88,89,91,92,93,94,95,96,97,98,99];
+  var tel = document.getElementById("tel");
+  var telErro = document.getElementById("telErro");
+
+  function soDigitos(v){ return v.replace(/\D/g, "").slice(0, 11); }
+  function mascaraTel(d){
+    var out = "";
+    if(d.length > 0) out = "(" + d.slice(0, 2);
+    if(d.length >= 2) out += ") ";
+    if(d.length > 2) out += d.slice(2, 3);
+    if(d.length > 3) out += " " + d.slice(3, 7);
+    if(d.length > 7) out += "-" + d.slice(7, 11);
+    return out;
+  }
+  function validaTel(d){
+    if(d.length < 2) return "Preencha o seu telefone com DDD.";
+    if(DDDS.indexOf(parseInt(d.slice(0, 2), 10)) === -1) return "O DDD (" + d.slice(0, 2) + ") não existe no Brasil. Corrija o telefone.";
+    if(d.length >= 3 && d.charAt(2) !== "9") return "Depois do DDD, o número de celular precisa começar com 9. Corrija o telefone.";
+    if(d.length < 11) return "Complete o telefone no formato (DDD) 9 XXXX-XXXX.";
+    return "";
+  }
+  function mostraTelErro(msg){
+    telErro.textContent = msg;
+    telErro.hidden = !msg;
+    tel.classList.toggle("invalido", !!msg);
+  }
+  tel.addEventListener("input", function(){
+    var d = soDigitos(tel.value);
+    tel.value = mascaraTel(d);
+    // enquanto digita, só aponta o que já dá pra saber que está errado
+    var m = validaTel(d);
+    var cedo = d.length < 11 && (m.indexOf("Complete") === 0 || m.indexOf("Preencha") === 0);
+    mostraTelErro(cedo ? "" : m);
+  });
+  tel.addEventListener("blur", function(){
+    var d = soDigitos(tel.value);
+    mostraTelErro(d ? validaTel(d) : "");
+  });
+
+  /* ---------- envio para a planilha ---------- */
+  var ultimoEnvio = "";
+  function enviaPlanilha(dados){
+    var corpo = JSON.stringify(dados);
+    if(!PLANILHA_URL || corpo === ultimoEnvio) return Promise.resolve();
+    var ctrl = ("AbortController" in window) ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 6000) : null;
+    return fetch(PLANILHA_URL, {
+      method: "POST",
+      body: corpo,
+      keepalive: true,
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function(r){ return r.json(); }).then(function(j){
+      if(j && j.ok) ultimoEnvio = corpo;
+    }).catch(function(){}).then(function(){ if(timer) clearTimeout(timer); });
+  }
 
   function val(name){
     var el = document.querySelector('input[name="'+name+'"]:checked');
@@ -705,8 +774,13 @@ footer .frase{
     });
   });
 
+  var enviando = false;
   document.getElementById("enviar").addEventListener("click", function(ev){
+    var botao = this;
+    if(enviando){ ev.preventDefault(); return; }
     var nome = document.getElementById("nome").value.trim();
+    var telD = soDigitos(tel.value);
+    var telMsg = validaTel(telD);
     var esp  = document.getElementById("esp").value.trim();
     var fat  = val("fat");
     var dia  = val("dia");
@@ -715,6 +789,7 @@ footer .frase{
 
     erro.hidden = true;
     if(!nome) { ev.preventDefault(); return falha("Preencha o seu nome completo.", document.getElementById("nome")); }
+    if(telMsg){ ev.preventDefault(); mostraTelErro(telMsg); return falha(telMsg, tel); }
     if(!esp)  { ev.preventDefault(); return falha("Preencha a sua especialidade.", document.getElementById("esp")); }
     if(!fat)  { ev.preventDefault(); return falha("Escolha a sua média de faturamento mensal.", document.getElementById("fat1")); }
     if(!dia)  { ev.preventDefault(); return falha("Escolha o melhor dia para a reunião.", document.getElementById("dia1")); }
@@ -723,6 +798,7 @@ footer .frase{
     var msg =
       "*INSCRIÇÃO · REUNIÃO ESTRATÉGICA VALORA*\n\n" +
       "*Nome:* " + nome + "\n" +
+      "*Telefone:* " + tel.value + "\n" +
       "*Especialidade:* " + esp + "\n" +
       "*Faturamento médio mensal:* " + fat + "\n" +
       "*1ª opção:* " + dia1 + ", " + ha + "\n" +
@@ -730,10 +806,26 @@ footer .frase{
       "Quero garantir minha reunião estratégica. Aguardo os dados do Pix-compromisso de R$ 250 para confirmar o horário.";
 
     var url = "https://wa.me/" + NUMERO + "?text=" + encodeURIComponent(msg);
-
-    this.href = url;
     document.getElementById("linkalt").href = url;
     document.getElementById("fallback").hidden = false;
+
+    // grava na planilha primeiro; o WhatsApp abre em seguida, com ou sem resposta
+    ev.preventDefault();
+    enviando = true;
+    botao.classList.add("enviando");
+    enviaPlanilha({
+      nome: nome,
+      telefone: tel.value,
+      especialidade: esp,
+      faturamento: fat,
+      dia: dia,
+      opcao1: dia1 + ", " + ha,
+      opcao2: dia2 + ", " + hb
+    }).then(function(){
+      enviando = false;
+      botao.classList.remove("enviando");
+      window.open(url, "_blank", "noopener");
+    });
   });
 })();
 </script>

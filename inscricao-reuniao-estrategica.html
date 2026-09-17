@@ -51,7 +51,9 @@
   --r-lg:22px;
   --r-md:14px;
   --r-sm:11px;
+  --pad:22px;
 }
+::selection{background:var(--gold-1);color:var(--ink)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{overflow-x:clip}
@@ -71,14 +73,15 @@ body{
 .hero{
   background-color:var(--ink);
   background-image:
-    radial-gradient(120% 70% at 50% 0%, rgba(223,181,141,.16) 0%, rgba(223,181,141,0) 55%),
-    linear-gradient(180deg, rgba(20,15,10,.66) 0%, rgba(20,15,10,.62) 40%, rgba(24,19,14,1) 100%),
+    radial-gradient(120% 70% at 50% 0%, rgba(223,181,141,.18) 0%, rgba(223,181,141,0) 55%),
+    radial-gradient(140% 90% at 50% 40%, rgba(0,0,0,0) 45%, rgba(0,0,0,.45) 100%),
+    linear-gradient(180deg, rgba(20,15,10,.6) 0%, rgba(20,15,10,.56) 38%, rgba(24,19,14,1) 100%),
     var(--foto);
   background-size:cover;
   background-position:center 30%;
   background-repeat:no-repeat;
   margin-inline:calc(50% - 50vw);
-  padding:58px 24px 118px;
+  padding:62px 24px 122px;
   text-align:center;
   position:relative;
   isolation:isolate;
@@ -130,7 +133,7 @@ h1{
 }
 
 /* ---------- corpo ---------- */
-main{display:flex;flex-direction:column;gap:26px;padding-block:0 48px}
+main{display:flex;flex-direction:column;gap:30px;padding-block:0 52px}
 
 /* abertura: vive sobre o fundo escuro, puxada pra dentro do hero */
 .lead{
@@ -158,7 +161,9 @@ main{display:flex;flex-direction:column;gap:26px;padding-block:0 48px}
 .lead::before{
   content:"";
   position:absolute;left:calc(50% - 50vw);right:calc(50% - 50vw);top:-40px;bottom:-64px;
-  background:#18130E;
+  background:
+    radial-gradient(70% 60% at 50% 100%, rgba(223,181,141,.10) 0%, rgba(223,181,141,0) 70%),
+    #18130E;
   z-index:-1;
 }
 
@@ -168,7 +173,7 @@ main{display:flex;flex-direction:column;gap:26px;padding-block:0 48px}
   border:1px solid rgba(223,181,141,.55);
   border-radius:var(--r-lg);
   padding:30px 22px 28px;
-  box-shadow:var(--shadow-card);
+  box-shadow:var(--shadow-card),inset 0 1px 0 rgba(255,255,255,.9);
   position:relative;z-index:2;
   margin-top:8px;
   animation:rise .9s .42s cubic-bezier(.2,.7,.2,1) both;
@@ -331,11 +336,16 @@ input[type=time]:focus{outline:none;border-color:var(--gold-deep);box-shadow:0 0
     radial-gradient(90% 60% at 100% 0%, rgba(223,181,141,.18) 0%, rgba(223,181,141,0) 60%),
     linear-gradient(160deg,#2B2622 0%,var(--ink) 55%,#181513 100%);
   color:var(--on-ink);
-  border:1px solid rgba(223,181,141,.35);
+  border:0;
   border-radius:var(--r-lg);
-  padding:28px 22px 26px;
+  padding:28px var(--pad) 26px;
   box-shadow:var(--shadow-pix);
   position:relative;overflow:hidden;
+}
+.pix::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  border:1px solid rgba(223,181,141,.38);border-radius:var(--r-lg);
+  box-shadow:inset 0 1px 0 rgba(255,226,185,.12);
 }
 .pix::before{
   content:"";position:absolute;left:0;right:0;top:0;height:2px;
@@ -343,9 +353,20 @@ input[type=time]:focus{outline:none;border-color:var(--gold-deep);box-shadow:0 0
 }
 .pix-top{
   display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;
-  margin-bottom:18px;padding-bottom:16px;
-  border-bottom:1px solid rgba(223,181,141,.22);
+  margin-bottom:22px;padding-bottom:18px;
+  border-bottom:1px dashed rgba(223,181,141,.42);
+  position:relative;
 }
+/* recortes de ticket nas laterais, na altura da linha pontilhada */
+.pix-top::before,.pix-top::after{
+  content:"";position:absolute;bottom:-12px;width:24px;height:24px;border-radius:50%;
+  background:var(--paper);
+  border:1px solid rgba(223,181,141,.38);
+  box-shadow:inset 0 2px 6px rgba(20,15,10,.18);
+  z-index:2;
+}
+.pix-top::before{left:calc(-1 * var(--pad) - 12px)}
+.pix-top::after{right:calc(-1 * var(--pad) - 12px)}
 .pix-top h2{
   margin:0;padding:0;text-transform:none;letter-spacing:.03em;font-size:21px;
   color:var(--gold-1);
@@ -442,11 +463,12 @@ a.send svg{flex:0 0 20px;width:20px;height:20px}
 
 /* ---------- regras ---------- */
 .regras{
-  background:transparent;
-  border:0;
-  border-left:2px solid var(--gold-1);
-  padding:6px 0 6px 18px;
-  margin-top:10px;
+  background:var(--tint-2);
+  border:1px solid rgba(223,181,141,.35);
+  border-left:3px solid var(--gold-1);
+  border-radius:var(--r-md);
+  padding:20px 20px 20px 22px;
+  margin-top:6px;
 }
 .regras h3{
   font-family:var(--display);
@@ -490,8 +512,9 @@ footer .frase{
 }
 
 @media (min-width:700px){
-  .hero{padding:72px 24px 132px}
-  .card,.pix{padding-inline:34px}
+  :root{--pad:34px}
+  .hero{padding:76px 24px 136px}
+  .card,.pix{padding-inline:var(--pad)}
   .lead{padding:0 14px}
 }
 @media (prefers-reduced-motion:reduce){

@@ -1,7 +1,7 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/inscricao-reuniao-estrategica.html" }
+    { "source": "/", "destination": "/inscricao-reuniao-estrategica" }
   ],
   "headers": [
     {

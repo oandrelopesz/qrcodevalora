@@ -224,7 +224,6 @@ input[type=text]:focus,input[type=tel]:focus{
 input.invalido,input.invalido:focus{border-color:#B8433A;box-shadow:0 0 0 4px rgba(184,67,58,.13)}
 .hint-erro{font-size:13px;color:#8C2F2F;margin:0;line-height:1.5}
 .hint-erro[hidden]{display:none}
-a.send.enviando{pointer-events:none;opacity:.85}
 
 /* opções: um bloco só, dividido por filetes */
 .opts{
@@ -774,10 +773,8 @@ footer .frase{
     });
   });
 
-  var enviando = false;
   document.getElementById("enviar").addEventListener("click", function(ev){
     var botao = this;
-    if(enviando){ ev.preventDefault(); return; }
     var nome = document.getElementById("nome").value.trim();
     var telD = soDigitos(tel.value);
     var telMsg = validaTel(telD);
@@ -806,13 +803,13 @@ footer .frase{
       "Quero garantir minha reunião estratégica. Aguardo os dados do Pix-compromisso de R$ 250 para confirmar o horário.";
 
     var url = "https://wa.me/" + NUMERO + "?text=" + encodeURIComponent(msg);
+    botao.href = url;
     document.getElementById("linkalt").href = url;
     document.getElementById("fallback").hidden = false;
 
-    // grava na planilha primeiro; o WhatsApp abre em seguida, com ou sem resposta
-    ev.preventDefault();
-    enviando = true;
-    botao.classList.add("enviando");
+    // O WhatsApp abre pelo próprio link (dentro do gesto do toque, sem bloqueio
+    // de popup no celular). A gravação na planilha corre em paralelo com
+    // keepalive: a página continua aberta, então a requisição completa.
     enviaPlanilha({
       nome: nome,
       telefone: tel.value,
@@ -821,10 +818,6 @@ footer .frase{
       dia: dia,
       opcao1: dia1 + ", " + ha,
       opcao2: dia2 + ", " + hb
-    }).then(function(){
-      enviando = false;
-      botao.classList.remove("enviando");
-      window.open(url, "_blank", "noopener");
     });
   });
 })();

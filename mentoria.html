@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Valora Med Club: mentoria para médicos construírem consultórios particulares sólidos, sustentáveis e valorizados. Com método, não com sorte.">
+<meta name="theme-color" content="#15100C">
+<style>html,body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Valora Med Club</title>
+<link rel="preload" href="assets/moonhouse.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+@font-face{font-family:"Moonhouse";src:url(assets/moonhouse.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+:root{
+  color-scheme:dark;
+  --noite:#15100C;
+  --bronze:#96723F; --ouro:#DFB58D; --champanhe:#FFE2B9; --marfim:#F6EFE4;
+  --areia:#D3C7B8; --areia-2:#A2957F;
+  --papel:#F1E9DC; --tinta:#211F1E; --tinta-2:#4A423A; --papel-linha:#D8CBB6;
+  --linha:rgba(223,181,141,.22); --linha-forte:rgba(223,181,141,.45);
+  --grad:linear-gradient(100deg,var(--ouro) 0%,var(--champanhe) 62%,#FFF1DC 100%);
+  --display:"Moonhouse","Manrope",system-ui,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{background:var(--noite);color:var(--areia);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;padding-bottom:84px}
+.wrap{max-width:620px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{text-transform:uppercase;font-family:var(--display);font-weight:400;margin:0}
+p{margin:0}
+a{color:var(--ouro)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:var(--noite);text-align:center;padding:18px 20px 8px}
+.hero::before{content:"";position:absolute;inset:0;background:url(assets/aneis.jpg) center 30%/cover no-repeat}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,16,12,.35) 0%,rgba(21,16,12,.62) 45%,rgba(21,16,12,.92) 75%,var(--noite) 100%)}
+.hero .in{position:relative;z-index:1;max-width:580px;margin:0 auto}
+.voltar{display:inline-flex;align-items:center;gap:8px;margin-bottom:26px;margin-right:auto;font-size:13.5px;font-weight:600;color:var(--areia);text-decoration:none;padding:8px 12px 8px 8px;border:1px solid var(--linha);border-radius:999px;background:rgba(21,16,12,.45);transition:border-color .15s,color .15s}
+.voltar:hover{border-color:var(--ouro);color:var(--champanhe)}
+.voltar svg{width:16px;height:16px}
+.hero .topo{display:flex;justify-content:flex-start}
+.hero .lockup{width:200px;max-width:58%;height:auto;display:block;margin:0 auto;filter:drop-shadow(0 4px 16px rgba(10,7,4,.55))}
+.fio{width:64px;height:2px;margin:26px auto 22px;background:var(--grad);border-radius:2px}
+h1{max-width:14ch;margin-inline:auto;font-size:clamp(26px,7vw,40px);line-height:1.14;letter-spacing:.01em;color:var(--champanhe);text-wrap:balance;text-shadow:0 2px 18px rgba(10,7,4,.5)}
+.lead{max-width:38ch;margin:20px auto 0;font-size:17.5px;line-height:1.65;color:var(--marfim);text-wrap:pretty;text-shadow:0 1px 10px rgba(10,7,4,.6)}
+
+.hero .in > *{animation:sobe .8s cubic-bezier(.2,.7,.2,1) both}
+.hero .in > :nth-child(2){animation-delay:.08s}
+.hero .in > :nth-child(3){animation-delay:.16s}
+.hero .in > :nth-child(4){animation-delay:.24s}
+.hero .in > :nth-child(5){animation-delay:.32s}
+@keyframes sobe{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ---------- vídeo ---------- */
+.video-sec{display:flex;justify-content:center;padding:26px 0 0}
+.video-wrap{position:relative;width:min(400px,100%);aspect-ratio:864/944;border-radius:20px;overflow:hidden;background:#000;border:1px solid var(--linha-forte);box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 80px rgba(223,181,141,.14)}
+.video-wrap video{width:100%;height:100%;object-fit:cover;display:block}
+.som{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-size:13px;font-weight:700;line-height:1;color:var(--champanhe);background:rgba(21,16,12,.72);border:1px solid var(--linha-forte);border-radius:999px;padding:11px 15px;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .15s,border-color .15s}
+.som:hover{background:rgba(21,16,12,.9);border-color:var(--ouro)}
+.som:focus-visible{outline:2px solid var(--champanhe);outline-offset:3px}
+.som svg{width:15px;height:15px}
+
+/* ---------- atalhos ---------- */
+.atalhos{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:22px 20px 0;margin-inline:-20px;-webkit-overflow-scrolling:touch}
+.atalhos::-webkit-scrollbar{display:none}
+.atalhos a{flex:none;font-size:13px;font-weight:600;color:var(--areia);text-decoration:none;border:1px solid var(--linha);border-radius:999px;padding:8px 13px;transition:border-color .15s,color .15s}
+.atalhos a:hover{border-color:var(--ouro);color:var(--champanhe)}
+.atalhos a.aplicar{color:var(--tinta);background:var(--grad);border-color:transparent;font-weight:700}
+
+/* ---------- seções ---------- */
+main{display:flex;flex-direction:column;gap:56px;padding-block:44px 56px}
+section{scroll-margin-top:16px}
+.kicker{font-size:14px;font-weight:600;color:var(--ouro);margin:0 0 8px}
+h2{font-size:clamp(19px,5vw,23px);line-height:1.25;letter-spacing:.03em;color:var(--champanhe);margin:0 0 18px;text-wrap:balance}
+.texto{display:flex;flex-direction:column;gap:14px}
+.texto p{font-size:16px;line-height:1.7;text-wrap:pretty}
+.texto strong{color:var(--marfim)}
+
+.vozes{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+.voz{position:relative;padding:4px 0 4px 18px;font-size:16.5px;line-height:1.55;font-style:italic;color:var(--marfim);text-wrap:pretty}
+.voz::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:2px;border-radius:2px;background:var(--linha-forte)}
+.pull{margin:22px 0 0;padding:4px 0 4px 16px;border-left:2px solid var(--ouro);font-size:18px;line-height:1.45;font-weight:800;color:var(--champanhe);text-wrap:balance}
+.pull.so{margin-top:0}
+
+.painel{background:rgba(223,181,141,.05);border:1px solid var(--linha);border-radius:20px;padding:26px 22px}
+.frase{font-family:var(--display);text-transform:uppercase;font-size:clamp(22px,6vw,30px);line-height:1.18;letter-spacing:.02em;color:var(--champanhe);text-wrap:balance;margin:0 0 18px}
+
+.pilares{display:grid;grid-template-columns:1fr;border-top:1px solid var(--linha);margin:0 0 24px}
+.pilar{padding:18px 0;border-bottom:1px solid var(--linha)}
+.pilar h3{font-size:14px;letter-spacing:.04em;color:var(--ouro);margin:0 0 6px}
+.pilar p{font-size:14.5px;line-height:1.6;text-wrap:pretty}
+
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;text-decoration:none;border-radius:14px;padding:18px 20px;font-family:var(--body);font-size:16px;font-weight:800;text-align:center;transition:transform .12s,box-shadow .15s,background .15s,border-color .15s}
+.btn-ouro{background:var(--grad);color:var(--tinta);box-shadow:0 12px 32px rgba(223,181,141,.18)}
+.btn-ouro:hover{transform:translateY(-1px);box-shadow:0 16px 36px rgba(223,181,141,.26)}
+.btn-linha{color:var(--champanhe);border:1px solid var(--linha-forte);background:transparent}
+.btn-linha:hover{border-color:var(--ouro);background:rgba(223,181,141,.07)}
+.btn-tinta{background:var(--tinta);color:var(--champanhe)}
+.btn-tinta:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(33,31,30,.22)}
+.btn:focus-visible{outline:2px solid var(--champanhe);outline-offset:4px}
+.btn svg{width:18px;height:18px;flex:none}
+
+.retrato{border-radius:20px;overflow:hidden;border:1px solid var(--linha);margin:0 0 22px;line-height:0;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.retrato img{width:100%;height:auto;display:block}
+.mentores{display:grid;grid-template-columns:1fr;gap:16px;margin-top:26px}
+.mentor{border:1px solid var(--linha);border-radius:18px;padding:20px 20px 22px;background:rgba(255,255,255,.025)}
+.mentor .nome{display:flex;align-items:center;gap:10px;font-family:var(--display);text-transform:uppercase;font-size:16px;letter-spacing:.03em;color:var(--marfim)}
+.ig{display:inline-flex;color:var(--ouro);transition:color .15s}
+.ig:hover{color:var(--champanhe)}
+.ig svg{width:18px;height:18px}
+.mentor .rqe{font-size:12.5px;font-weight:700;color:var(--ouro);font-variant-numeric:tabular-nums;margin:2px 0 12px}
+.mentor ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.mentor li{position:relative;padding-left:18px;font-size:14.5px;line-height:1.55;color:var(--areia)}
+.mentor li::before{content:"";position:absolute;left:0;top:.72em;width:9px;height:1.5px;background:var(--ouro)}
+.materia{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:14px;font-weight:700;color:var(--ouro);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--linha-forte)}
+.materia:hover{color:var(--champanhe)}
+.materia svg{width:14px;height:14px}
+
+.depoimentos{display:flex;flex-direction:column;gap:14px}
+.dep{position:relative;border:1px solid var(--linha);border-radius:18px;padding:26px 20px 20px 22px;background:rgba(255,255,255,.025)}
+.dep .aspas{position:absolute;top:10px;left:16px;font-family:var(--body);font-size:44px;line-height:1;font-weight:800;color:var(--ouro);opacity:.55}
+.dep blockquote{margin:14px 0 16px;font-size:16.5px;line-height:1.6;color:var(--marfim);text-wrap:pretty}
+.dep .autor{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--marfim)}
+.dep .papel{font-size:13px;color:var(--areia-2)}
+.nota{margin-top:18px;padding-top:14px;border-top:1px solid var(--linha);font-size:12.5px;line-height:1.6;color:var(--areia-2);text-wrap:pretty}
+
+/* o bloco claro: auto análise */
+.claro{background:var(--papel);color:var(--tinta-2);border-radius:20px;padding:32px 24px 26px;position:relative;overflow:hidden}
+.claro::before{content:"";position:absolute;right:-140px;top:-140px;width:320px;height:320px;border-radius:50%;border:1px solid rgba(150,114,63,.22);box-shadow:0 0 0 30px rgba(150,114,63,.05),0 0 0 60px rgba(150,114,63,.035);pointer-events:none}
+.claro > *{position:relative}
+.claro .kicker{color:var(--bronze)}
+.claro h2{color:var(--tinta)}
+.quadro{padding:18px 0 6px;border-top:1px solid var(--papel-linha)}
+.quadro .titulo{font-family:var(--display);text-transform:uppercase;font-size:14px;letter-spacing:.04em;color:var(--bronze);margin:0 0 12px}
+.quadro ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.quadro li{position:relative;padding-left:28px;font-size:15px;line-height:1.55;color:var(--tinta-2);text-wrap:pretty}
+.quadro li::before{position:absolute;left:0;top:0;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:800;line-height:1}
+.quadro.sim li::before{content:"✓";background:var(--tinta);color:var(--champanhe)}
+.quadro.nao li::before{content:"×";border:1.5px solid var(--bronze);color:var(--bronze);font-size:13px}
+.quadro.nao li{color:var(--tinta-2)}
+.claro .btn{margin-top:22px}
+
+/* ---------- contato ---------- */
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.lbl{font-size:14.5px;font-weight:600;color:var(--areia)}
+input[type=text],input[type=tel],input[type=email]{font-family:var(--body);font-size:16px;color:var(--marfim);background:rgba(255,255,255,.035);border:1px solid var(--linha);border-radius:12px;padding:14px 15px;width:100%;transition:border-color .15s,background .15s}
+input::placeholder{color:var(--areia-2);opacity:.8}
+input:focus{outline:none;border-color:var(--ouro);background:rgba(223,181,141,.07)}
+.interesses{border:0;padding:0;margin:6px 0 20px}
+.interesses legend{padding:0;margin:0 0 10px;font-size:14.5px;font-weight:600;color:var(--areia)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative;display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--marfim);border:1px solid var(--linha);border-radius:999px;padding:9px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.chip input{position:absolute;opacity:0;width:0;height:0}
+.chip::before{content:"";width:14px;height:14px;border-radius:50%;border:1.5px solid var(--linha-forte);flex:none;transition:background .15s,border-color .15s}
+.chip:hover{border-color:var(--linha-forte)}
+.chip:has(input:checked){border-color:var(--ouro);background:rgba(223,181,141,.1)}
+.chip:has(input:checked)::before{background:var(--grad);border-color:transparent}
+.chip:has(input:focus-visible){outline:2px solid var(--ouro);outline-offset:2px}
+.erro{font-size:14px;color:#F3C2BC;background:#3A1E1B;border:1px solid #7A3A34;border-radius:12px;padding:12px 14px;text-align:center;margin:0 0 14px}
+.nota-form{margin-top:14px;border-top:0;padding-top:0;text-align:center}
+
+/* ---------- podcast ---------- */
+.ep{margin-top:6px}
+.ep .meta{font-size:13px;font-weight:600;color:var(--areia-2);margin:0 0 10px}
+.ep .num{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.02em;color:var(--tinta);background:var(--grad);border-radius:999px;padding:4px 10px;margin:0 0 10px;font-variant-numeric:tabular-nums}
+.ep .titulo{font-family:var(--display);text-transform:uppercase;font-size:clamp(18px,5vw,22px);line-height:1.25;letter-spacing:.03em;color:var(--marfim);margin:0 0 20px;text-wrap:balance}
+.acoes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* ---------- rodapé ---------- */
+footer{position:relative;text-align:center;padding:48px 20px 40px;background:radial-gradient(70% 60% at 50% 110%,rgba(150,114,63,.28),transparent 70%)}
+footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--linha-forte),transparent)}
+footer img{width:42px;height:auto;display:block;margin:0 auto 18px}
+footer .marca{margin:0 0 6px;font-family:var(--display);text-transform:uppercase;font-size:14px;letter-spacing:.04em;color:var(--champanhe)}
+footer .lema{margin:0;font-size:13.5px;color:var(--areia-2)}
+footer .redes{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:26px}
+footer .redes a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ouro);border:1px solid var(--linha);border-radius:999px;padding:10px 16px;font-size:13.5px;font-weight:600;transition:background .15s,border-color .15s}
+footer .redes a:hover{background:rgba(223,181,141,.08);border-color:var(--ouro)}
+footer .redes a:focus-visible{outline:2px solid var(--champanhe);outline-offset:3px}
+footer .redes svg{width:17px;height:17px}
+
+/* ---------- botão flutuante ---------- */
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:10;display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-size:14px;font-weight:800;color:var(--tinta);background:var(--grad);border-radius:999px;padding:13px 18px 13px 15px;box-shadow:0 12px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,226,185,.35);transition:transform .15s}
+.fab:hover{transform:translateY(-1px)}
+.fab:focus-visible{outline:2px solid var(--champanhe);outline-offset:3px}
+.fab svg{width:18px;height:18px}
+
+@media (min-width:480px){
+  .pilares{grid-template-columns:1fr 1fr}
+  .pilar{padding:18px 14px 18px 0}
+  .pilar:nth-child(odd){border-right:1px solid var(--linha)}
+  .pilar:nth-child(even){padding-left:14px}
+  .mentores{grid-template-columns:1fr 1fr}
+  .campos{display:grid;grid-template-columns:1fr 1fr;column-gap:12px}
+  .campos .largo{grid-column:1 / -1}
+}
+@media (min-width:640px){
+  .hero{padding:26px 20px 12px}
+  .hero .lockup{width:230px}
+  main{gap:68px}
+  .painel,.claro{padding:36px 36px 30px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="in">
+    <div class="topo">
+      <a class="voltar" href="inscricao-reuniao-estrategica.html">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+        Voltar
+      </a>
+    </div>
+    <img class="lockup" src="assets/logo-valora-med-club.png" alt="Valora Med Club">
+    <div class="fio" aria-hidden="true"></div>
+    <h1>O movimento da valorização médica</h1>
+    <p class="lead">Ajudamos colegas na construção de consultórios particulares sólidos, sustentáveis e valorizados. Com método, não com sorte.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="video-sec" aria-label="Vídeo de apresentação">
+    <div class="video-wrap">
+      <video id="video" src="assets/valora.mp4" poster="assets/video-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+      <button class="som" id="som" type="button" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M23 9l-6 6M17 9l6 6"></path></svg>
+        <span id="som-label">Ativar som</span>
+      </button>
+    </div>
+  </section>
+
+  <nav class="atalhos" aria-label="Seções da página">
+    <a href="#o-que-e">O que é</a>
+    <a href="#pilares">Pilares</a>
+    <a href="#mentores">Mentores</a>
+    <a href="#depoimentos">Depoimentos</a>
+    <a href="#proposito">Propósito</a>
+    <a class="aplicar" href="#contato">Aplicação</a>
+  </nav>
+
+  <main>
+
+    <section aria-labelledby="t-vozes">
+      <p class="kicker">Um sentimento latente</p>
+      <h2 id="t-vozes">O que não se fala nos corredores</h2>
+      <div class="vozes">
+        <p class="voz">“Trabalho mais do que nunca e a conta continua apertada.”</p>
+        <p class="voz">“Já tentei subir o preço. A agenda esvaziou na semana seguinte.”</p>
+        <p class="voz">“Contratei gestor de tráfego, equipe de marketing, fiz Instagram. Mas nada disso me deu um retorno.”</p>
+        <p class="voz">“Sei operar, sei diagnosticar, sei conduzir, mas não sei gerir meu consultório.”</p>
+      </div>
+      <p class="pull so">O problema não é falta de capacidade, é falta de direcionamento.</p>
+    </section>
+
+    <section id="o-que-e" aria-labelledby="t-oque">
+      <p class="kicker">O que é</p>
+      <h2 id="t-oque">Uma mentoria para crescer com estratégia</h2>
+      <div class="texto">
+        <p>O Valora Med Club é um programa de mentoria para médicos que estão construindo a própria trajetória no particular ou saindo de um modelo baseado em convênio e plantões.</p>
+        <p>Criado em 2026 por dois médicos que ensinam uma metodologia desenvolvida e validada na prática. Tratam a carreira como algo que precisa de estratégia e estrutura. Atingiram o sucesso através do posicionamento, comunicação de valor e experiência do paciente.</p>
+        <p>Os temas abordados são os que definem o dia a dia de um consultório em crescimento constante: mentalidade, posicionamento, vendas, treinamento de equipe, liderança, planos de acompanhamento, jornada do paciente e gestão.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-tese">
+      <p class="kicker">A tese</p>
+      <div class="painel">
+        <p class="frase" id="t-tese">Volume não é sinônimo de sucesso.</p>
+        <div class="texto">
+          <p>Autonomia para poder decidir como trabalhar, que tipo de medicina praticar e o quanto cobrar pelo próprio serviço, é parte da dignidade profissional. Sem ela não existe satisfação nem carreira sustentável.</p>
+          <p>Um volume saudável de atendimentos cria tempo, e tempo é o que permite acompanhar melhor, orientar melhor e entregar mais valor a cada paciente. Entendemos que valorizar o paciente começa pela construção de um ambiente saudável para quem cuida.</p>
+        </div>
+      </div>
+      <p class="pull">A consulta é uma parte de um processo coordenado para construção de um consultório sólido e sustentável, não um evento isolado.</p>
+    </section>
+
+    <section id="pilares" aria-labelledby="t-pilares">
+      <p class="kicker">Pilares</p>
+      <h2 id="t-pilares">O que desenvolvemos</h2>
+      <div class="pilares">
+        <div class="pilar"><h3>Mentalidade</h3><p>Protagonismo no lugar do vitimismo. Médico que se valoriza cuida melhor, e essa mudança costuma vir antes de qualquer mudança de processo.</p></div>
+        <div class="pilar"><h3>Gestão</h3><p>Análise de indicadores do consultório, precificação, ponto de equilíbrio, processos, metas e formação de equipe. O que sustenta a operação quando o médico não está na sala.</p></div>
+        <div class="pilar"><h3>Técnica de vendas</h3><p>Vender é comunicar valor, gerar confiança e ajudar o paciente a compreender uma proposta de cuidado. Não é pressão comercial. E o processo de uma venda bem realizada, leve e ética, se aprende e é treinável.</p></div>
+        <div class="pilar"><h3>Conexões</h3><p>Ambiente molda mentalidade. Médicos fortes se conectam com médicos fortes: crescer sozinho é mais difícil, e seguir quem já está à frente poupa tempo, dinheiro e frustração.</p></div>
+      </div>
+      <a class="btn btn-ouro" href="#contato">Aplique-se para Mentoria</a>
+    </section>
+
+    <section id="mentores" aria-labelledby="t-mentores">
+      <p class="kicker">Quem conduz</p>
+      <h2 id="t-mentores">Não é teoria de palco. É o caminho que nós dois percorremos</h2>
+      <div class="retrato"><img src="assets/mentores.jpg" alt="Dra. Nayara Curti e Dr. Renan Gerbelli"></div>
+      <div class="texto">
+        <p>A Valora não começou como um projeto de ensino. Começou de um problema. Um casal de médicos vivendo exatamente o que milhares de colegas vivem: plantão sem fim, dependência de convênios, pouca autonomia, pouco tempo em casa, exaustão e frustração. A sensação de trabalhar cada vez mais e construir cada vez menos.</p>
+        <p>Ao chegarem ao limite do esgotamento, tomaram uma decisão: acreditar que vieram pra ser muito mais do que estavam sendo e, num ato de coragem, criar um novo caminho. Desenvolveram habilidades comerciais que não tinham, investiram, e redirecionaram as suas carreiras, mas dessa vez com estratégia.</p>
+        <p>E é com esta mesma estratégia que hoje ensinam seus mentorados a se valorizarem, crescerem, e exercerem uma medicina livre e de excelência, como sempre acreditaram ser possível.</p>
+      </div>
+      <p class="pull">Primeiro vivemos. Depois organizamos. Só então passamos a ensinar.</p>
+      <div class="texto" style="margin-top:22px">
+        <p>Desse processo nasceu o Instituto Valora, um espaço próprio localizado em São José dos Campos. Construído para ser o exemplo vivo de uma metodologia que valoriza vidas — dos pacientes, profissionais de saúde e seus colaboradores.</p>
+      </div>
+
+      <div class="mentores">
+        <div class="mentor">
+          <p class="nome">Dr. Renan Gerbelli <a class="ig" target="_blank" rel="noopener" href="https://www.instagram.com/dr.renangerbelli/" aria-label="Instagram de Dr. Renan Gerbelli" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"></circle></svg></a></p>
+          <p class="rqe">RQE 84.367</p>
+          <ul>
+            <li>Ortopedista, Gestor em Saúde pelo Hospital Israelita Albert Einstein.</li>
+            <li>Mais de 10 anos de experiência em gestão e liderança.</li>
+            <li>Responsável por transformar método em prática dentro do consultório.</li>
+          </ul>
+          <a class="materia" target="_blank" rel="noopener" href="https://voceenegocios.com.br/dr-renan-gerbelli-o-negocio-de-transformar-a-saude/">
+            Leia a matéria da revista “Você &amp; Negócios”
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3H3v10h10v-3M9 3h4v4M13 3 7 9"/></svg>
+          </a>
+        </div>
+        <div class="mentor">
+          <p class="nome">Dra. Nayara Curti <a class="ig" target="_blank" rel="noopener" href="https://www.instagram.com/dranayaracurti.neuro/" aria-label="Instagram de Dra. Nayara Curti" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"></circle></svg></a></p>
+          <p class="rqe">RQE 98.803</p>
+          <ul>
+            <li>Neurologista, especialista em Cognição e Comportamento pela UNIFESP.</li>
+            <li>Une neurociência, comunicação e construção de confiança.</li>
+            <li>Responsável por toda a experiência do paciente dentro da metodologia Valora.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="depoimentos" aria-labelledby="t-dep">
+      <p class="kicker">Quem já passou</p>
+      <h2 id="t-dep">O que dizem os mentorados</h2>
+      <div class="depoimentos">
+        <div class="dep">
+          <p class="aspas" aria-hidden="true">“</p>
+          <blockquote>Eu dobrei meu faturamento depois de 1 mês aplicando o método. E o mais interessante é que foi o meu maior faturamento dos últimos 3 anos.</blockquote>
+          <p class="autor">Melissa Alfredo <a class="ig" target="_blank" rel="noopener" href="https://www.instagram.com/dra.melissaalfredo/" aria-label="Instagram de Melissa Alfredo" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"></circle></svg></a></p>
+          <p class="papel">Mentorada Valora</p>
+        </div>
+        <div class="dep">
+          <p class="aspas" aria-hidden="true">“</p>
+          <blockquote>Eles me deram confiança e me orientaram um passo a passo que realmente funciona. Com a mentoria, eles fazem com que a gente não perca o foco e não saia do caminho.</blockquote>
+          <p class="autor">Mariana Roma <a class="ig" target="_blank" rel="noopener" href="https://www.instagram.com/dra.marianaroma/" aria-label="Instagram de Mariana Roma" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"></circle></svg></a></p>
+          <p class="papel">Mentorada Valora</p>
+        </div>
+        <div class="dep">
+          <p class="aspas" aria-hidden="true">“</p>
+          <blockquote>Minha dor era não ter tempo de qualidade com meus filhos. Renan e Nayara trouxeram uma estratégia individualizada pro nicho que eu precisava alcançar. Com 1 mês minha mentoria estava paga. Eu consegui liberar 1 dia da agenda e coloquei 10 planos de acompanhamento em prática.</blockquote>
+          <p class="autor">Ingrid Esquillaro <a class="ig" target="_blank" rel="noopener" href="https://www.instagram.com/dra.ingridesquillaro/" aria-label="Instagram de Ingrid Esquillaro" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"></circle></svg></a></p>
+          <p class="papel">Mentorada Valora</p>
+        </div>
+      </div>
+      <p class="nota">Depoimentos de mentoradas, reproduzidos como recebidos. São experiências individuais: resultado depende de contexto, especialidade, mercado e execução. Não há promessa de desempenho.</p>
+    </section>
+
+    <section class="claro" aria-labelledby="t-auto">
+      <p class="kicker">Auto análise</p>
+      <h2 id="t-auto">Saiba se é para você</h2>
+      <div class="quadro sim">
+        <p class="titulo">É para você se</p>
+        <ul>
+          <li>Possui ou não um consultório próprio, e cansou de tentar crescer no improviso.</li>
+          <li>Atende bem, sua agenda até cresce, mas não se sente valorizado.</li>
+          <li>Já percebeu que ser bom tecnicamente não é sinônimo de atingir o sucesso.</li>
+          <li>Quer ter mais tempo de qualidade, dentro e fora do consultório.</li>
+          <li>Quer saber como liderar, gerir e bater metas.</li>
+        </ul>
+      </div>
+      <div class="quadro nao">
+        <p class="titulo">Não é para você se</p>
+        <ul>
+          <li>Procura uma fórmula pronta de enriquecimento rápido.</li>
+          <li>Quer aumentar o faturamento a qualquer custo.</li>
+          <li>Busca algo para substituir formação ou atualização clínica.</li>
+        </ul>
+      </div>
+      <a class="btn btn-tinta" href="#contato">Aplique-se para Mentoria</a>
+    </section>
+
+    <section id="proposito" aria-labelledby="t-prop">
+      <p class="kicker">Propósito</p>
+      <h2 id="t-prop">Por que fazemos isso</h2>
+      <div class="texto">
+        <p>Porque acreditamos que a medicina não deveria obrigar um profissional a escolher entre construir uma grande carreira ou viver com tempo de qualidade pra si e pra família.</p>
+        <p>Quando o médico recupera autonomia, tempo e previsibilidade, ele volta a exercer a medicina da forma que sempre imaginou.</p>
+      </div>
+      <p class="pull">Porque um médico que se valoriza, cuida melhor. E um paciente bem cuidado é a razão de tudo isso.</p>
+    </section>
+
+    <section id="contato" aria-labelledby="t-contato">
+      <p class="kicker">Próximo passo</p>
+      <h2 id="t-contato">Quero receber mais informações da mentoria Valora</h2>
+      <p class="texto" style="margin-bottom:22px"><span style="font-size:14.5px;color:var(--areia-2)">Preencha os campos e o WhatsApp abre com a mensagem já escrita.</span></p>
+
+      <form class="form" id="form" novalidate>
+        <div class="campos">
+          <div class="field"><label class="lbl" for="f-nome">Nome</label><input id="f-nome" name="nome" type="text" autocomplete="name"></div>
+          <div class="field"><label class="lbl" for="f-crm">CRM</label><input id="f-crm" name="crm" type="text" placeholder="CRM/UF 000000"></div>
+          <div class="field"><label class="lbl" for="f-zap">WhatsApp</label><input id="f-zap" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000"></div>
+          <div class="field"><label class="lbl" for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+          <div class="field largo"><label class="lbl" for="f-insta">Instagram</label><input id="f-insta" name="instagram" type="text" placeholder="@seuperfil"></div>
+        </div>
+
+        <fieldset class="interesses">
+          <legend>Interesse</legend>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="interesse" value="Volume de agenda">Volume de agenda</label>
+            <label class="chip"><input type="checkbox" name="interesse" value="Treinamento de secretária">Treinamento de secretária</label>
+            <label class="chip"><input type="checkbox" name="interesse" value="Planos de acompanhamento">Planos de acompanhamento</label>
+            <label class="chip"><input type="checkbox" name="interesse" value="Gestão de consultório">Gestão de consultório</label>
+            <label class="chip"><input type="checkbox" name="interesse" value="Comunicação e posicionamento">Comunicação e posicionamento</label>
+            <label class="chip"><input type="checkbox" name="interesse" value="Técnicas de vendas">Técnicas de vendas</label>
+          </div>
+        </fieldset>
+
+        <p class="erro" id="erro" hidden></p>
+
+        <a class="btn btn-ouro" id="enviar" target="_blank" rel="noopener" href="https://wa.me/5512996746674?text=Ol%C3%A1%21%20Quero%20receber%20mais%20informa%C3%A7%C3%B5es%20da%20mentoria%20Valora%20Med%20Club.">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.71-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+          Enviar por WhatsApp
+        </a>
+
+        <p class="nota nota-form">Ao enviar, o WhatsApp abre com a mensagem já preenchida e os seus dados ficam registrados com a equipe Valora. Informações falsas ou incompletas fazem o contato ser descartado.</p>
+      </form>
+    </section>
+
+    <section aria-labelledby="t-pod">
+      <p class="kicker">Podcast</p>
+      <h2 id="t-pod">O Código Valora</h2>
+      <div class="texto"><p>Toda semana, uma conversa sobre carreira médica, consultório particular e as escolhas que determinam gerações. Episódios completos no YouTube e Spotify.</p></div>
+      <div class="painel ep" style="margin-top:20px">
+        <p class="meta">Assista a um episódio</p>
+        <span class="num">Ep. 011</span>
+        <p class="titulo">Quando o médico se torna empreendedor</p>
+        <div class="acoes">
+          <a class="btn btn-ouro" target="_blank" rel="noopener" href="https://youtu.be/v2_0EbfIr2Q?si=P_s_5_q1mDjJXafZ">YouTube</a>
+          <a class="btn btn-linha" target="_blank" rel="noopener" href="https://open.spotify.com/episode/7DTkXWxkPLTfui2gsf2xM9?si=9ea941137ea9458d">Spotify</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <img src="assets/marca-v.png" alt="">
+  <p class="marca">Valora Med Club</p>
+  <p class="lema">Médico que se valoriza, cuida melhor.</p>
+  <nav class="redes" aria-label="Redes sociais">
+    <a href="https://instagram.com/valoramedclub" target="_blank" rel="noopener" aria-label="Instagram @valoramedclub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"></circle></svg>
+      <span>Instagram</span>
+    </a>
+    <a href="https://www.youtube.com/@OC%C3%B3digoValora" target="_blank" rel="noopener" aria-label="YouTube O Código Valora">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="4"></rect><path d="M10.4 9.2l4.6 2.8-4.6 2.8z" fill="currentColor" stroke="none"></path></svg>
+      <span>YouTube</span>
+    </a>
+    <a href="https://open.spotify.com/show/033EEOdTrJZ9K1BRWF6K46?si=b378319002384976" target="_blank" rel="noopener" aria-label="Spotify O Código Valora">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      <span>Spotify</span>
+    </a>
+  </nav>
+</footer>
+
+<a class="fab" href="#contato" aria-label="Ir para o formulário de contato">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.9 8.9 0 0 1-3.8-.9L3 21l1.9-5.1A8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5z"></path></svg>
+  Falar no WhatsApp
+</a>
+
+<script>
+(function () {
+  var NUM = '5512996746674';
+  var PLANILHA_URL = 'https://script.google.com/macros/s/AKfycbx_odzdL3BfOuWHrArMoSav70ARbk4fMpeQKxpPYcdIdgb2Xga7drIQh1AswRr3r7AnmQ/exec'; // Web App do Apps Script (grava na planilha)
+  var form = document.getElementById('form');
+  var botao = document.getElementById('enviar');
+  var erro = document.getElementById('erro');
+
+  function val(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+  function interesses() {
+    return Array.prototype.slice
+      .call(form.querySelectorAll('input[name="interesse"]:checked'))
+      .map(function (c) { return c.value; });
+  }
+  function mensagem() {
+    var linhas = ['Olá! Quero receber mais informações da mentoria Valora Med Club.', ''];
+    var campos = [
+      ['Nome', val('f-nome')],
+      ['CRM', val('f-crm')],
+      ['WhatsApp', val('f-zap')],
+      ['E-mail', val('f-email')],
+      ['Instagram', val('f-insta')]
+    ];
+    campos.forEach(function (c) { if (c[1]) { linhas.push(c[0] + ': ' + c[1]); } });
+    var i = interesses();
+    if (i.length) { linhas.push('Interesse: ' + i.join(', ')); }
+    return linhas.join('\n');
+  }
+  function atualizar() {
+    botao.href = 'https://wa.me/' + NUM + '?text=' + encodeURIComponent(mensagem());
+  }
+  /* grava na planilha sem travar a abertura do WhatsApp; não repete o mesmo envio */
+  var ultimoEnvio = '';
+  function enviaPlanilha(dados) {
+    var corpo = JSON.stringify(dados);
+    if (!PLANILHA_URL || corpo === ultimoEnvio) { return; }
+    ultimoEnvio = corpo;
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 8000) : null;
+    fetch(PLANILHA_URL, { method: 'POST', body: corpo, keepalive: true, signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!(j && j.ok)) { ultimoEnvio = ''; } })
+      .catch(function () { ultimoEnvio = ''; })
+      .then(function () { if (timer) { clearTimeout(timer); } });
+  }
+
+  function faltando() {
+    var f = [];
+    if (!val('f-nome')) { f.push('nome'); }
+    if (!val('f-crm')) { f.push('CRM'); }
+    if (!val('f-zap')) { f.push('WhatsApp'); }
+    return f;
+  }
+
+  form.addEventListener('input', function () {
+    atualizar();
+    if (!erro.hidden && faltando().length === 0) { erro.hidden = true; }
+  });
+  form.addEventListener('change', atualizar);
+
+  botao.addEventListener('click', function (e) {
+    var f = faltando();
+    if (f.length) {
+      e.preventDefault();
+      erro.textContent = 'Preencha ' + (f.length > 1 ? 'os campos' : 'o campo') + ' ' + f.join(', ') + ' antes de enviar.';
+      erro.hidden = false;
+      var alvo = document.getElementById(!val('f-nome') ? 'f-nome' : (!val('f-crm') ? 'f-crm' : 'f-zap'));
+      if (alvo) { alvo.focus(); }
+      return;
+    }
+    enviaPlanilha({
+      fonte: 'LP com vídeo',
+      nome: val('f-nome'),
+      crm: val('f-crm'),
+      whatsapp: val('f-zap'),
+      email: val('f-email'),
+      instagram: val('f-insta'),
+      interesse: interesses().join(', ')
+    });
+  });
+
+  atualizar();
+})();
+
+(function () {
+  var video = document.getElementById('video');
+  var botao = document.getElementById('som');
+  var rotulo = document.getElementById('som-label');
+  if (!video || !botao) { return; }
+
+  var iconeMudo = '<path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M23 9l-6 6M17 9l6 6"></path>';
+  var iconeSom = '<path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"></path>';
+
+  botao.addEventListener('click', function () {
+    video.muted = !video.muted;
+    botao.setAttribute('aria-pressed', String(!video.muted));
+    rotulo.textContent = video.muted ? 'Ativar som' : 'Desativar som';
+    botao.querySelector('svg').innerHTML = video.muted ? iconeMudo : iconeSom;
+    if (!video.muted) { video.play(); }
+  });
+
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    video.removeAttribute('autoplay');
+    video.controls = true;
+    video.pause();
+  }
+})();
+</script>
+</body>
+</html>
